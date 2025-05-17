@@ -96,7 +96,7 @@ function App() {
 						<div className="space-y-3">
 								<ConnectButton className='w-full' />
 							<p className="text-xs text-gray-500">
-								Demo mode - Click to explore the interface
+								Click to explore the interface
 							</p>
 						</div>
 					</CardContent>
