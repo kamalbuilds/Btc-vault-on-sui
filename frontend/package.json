@@ -10,8 +10,8 @@
 		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
 	},
 	"dependencies": {
-		"@mysten/dapp-kit-next": "",
-		"@mysten/sui": "^1.0.0",
+		"@mysten/dapp-kit-next": "workspace:*",
+		"@mysten/sui": "^1.30.1",
 		"@nanostores/react": "^1.0.0",
 		"@radix-ui/react-alert-dialog": "^1.0.5",
 		"@radix-ui/react-avatar": "^1.0.4",
@@ -26,7 +26,7 @@
 		"@radix-ui/react-switch": "^1.0.3",
 		"@radix-ui/react-tabs": "^1.0.4",
 		"@radix-ui/react-toast": "^1.1.5",
-		"@tanstack/react-query": "^5.0.0",
+		"@tanstack/react-query": "^5.77.2",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
 		"date-fns": "^3.0.0",

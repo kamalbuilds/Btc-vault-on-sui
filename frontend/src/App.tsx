@@ -5,7 +5,9 @@ import React, { useState } from 'react'
 import Dashboard from './components/Dashboard'
 import { Button } from './components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card'
-import { Bitcoin, Wallet, Shield } from 'lucide-react'
+import { Bitcoin, Wallet, Shield } from 'lucide-react';
+import { ConnectButton } from '@mysten/dapp-kit';
+import '@mysten/dapp-kit/dist/index.css';
 
 function App() {
 	const [isConnected, setIsConnected] = useState(false)
@@ -92,14 +94,7 @@ function App() {
 					</CardHeader>
 					<CardContent className="space-y-4">
 						<div className="space-y-3">
-							<Button
-								onClick={connectWallet}
-								variant="bitcoin"
-								className="w-full"
-							>
-								<Wallet className="w-4 h-4 mr-2" />
-								Connect Sui Wallet (Demo)
-							</Button>
+								<ConnectButton className='w-full' />
 							<p className="text-xs text-gray-500">
 								Demo mode - Click to explore the interface
 							</p>
