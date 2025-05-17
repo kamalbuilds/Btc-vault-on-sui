@@ -1,596 +1,228 @@
 # BitcoinVault Pro Frontend
 
-> Modern TypeScript frontend for BitcoinVault Pro enterprise treasury management platform
+Enterprise Bitcoin Treasury Management Platform - Frontend Application
 
-## 🚀 Overview
+## Overview
 
-The BitcoinVault Pro frontend is built with modern web technologies, providing a professional and intuitive interface for enterprise Bitcoin treasury management. It leverages Lit web components for modularity and the Sui TypeScript SDK for blockchain interactions.
+BitcoinVault Pro is a professional-grade Bitcoin treasury management platform built on Sui blockchain with dWallet Network integration. This frontend provides an intuitive interface for managing Bitcoin treasury operations, compliance monitoring, and risk assessment.
 
-## 🛠️ Technology Stack
+## Features
 
-- **TypeScript**: Type-safe development with full IDE support
-- **Lit Web Components**: Lightweight, fast, and framework-agnostic components
-- **Vite**: Lightning-fast build tool and development server
-- **Sui TypeScript SDK**: Official Sui blockchain integration
-- **dWallet SDK**: Programmable custody and Bitcoin signing
-- **Storybook**: Component development and documentation
+### 🔐 Secure Treasury Management
+- Multi-signature Bitcoin vaults with programmable policies
+- Real-time balance monitoring and transaction tracking
+- Advanced spending controls and approval workflows
 
-## 📦 Installation
+### 📊 Analytics & Reporting
+- Portfolio analytics with real-time Bitcoin price data
+- Risk assessment and compliance monitoring
+- Transaction history and audit trails
+
+### 🛡️ Compliance & Security
+- Built-in KYC/AML verification
+- Automated regulatory reporting
+- Risk scoring and threat detection
+
+### 🎨 Modern UI/UX
+- Responsive design with Tailwind CSS
+- Professional Bitcoin-themed interface
+- Real-time updates and notifications
+
+## Technology Stack
+
+- **Frontend Framework**: React 18 with TypeScript
+- **Styling**: Tailwind CSS with custom Bitcoin theme
+- **UI Components**: Radix UI primitives
+- **State Management**: Zustand
+- **Icons**: Lucide React
+- **Build Tool**: Vite
+- **Blockchain Integration**: Sui SDK (ready for dWallet Network)
+
+## Getting Started
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
-- pnpm (recommended) or npm
-- Git
+- Node.js 18+ 
+- npm or yarn
+- Modern web browser
 
-### Setup
+### Installation
 
-```bash
-# Install dependencies
-pnpm install
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd btcvaultonsui/frontend
+   ```
 
-# Start development server
-pnpm dev
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-# Start Storybook for component development
-pnpm storybook
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open in browser**
+   Navigate to `http://localhost:5173`
+
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+## Project Structure
+
+```
+src/
+├── components/           # React components
+│   ├── ui/              # Reusable UI components
+│   │   ├── button.tsx   # Button component
+│   │   └── card.tsx     # Card component
+│   └── Dashboard.tsx    # Main dashboard component
+├── lib/                 # Utility functions
+│   └── utils.ts         # Helper functions
+├── store/               # State management
+│   └── treasury.ts      # Treasury store (Zustand)
+├── App.tsx              # Main application component
+├── main.tsx             # Application entry point
+└── index.css            # Global styles
+
 ```
 
-## 🏗️ Project Structure
+## Key Components
 
-```
-frontend/
-├── src/
-│   ├── components/          # Lit web components
-│   │   ├── treasury/        # Treasury management components
-│   │   ├── proposals/       # Proposal workflow components
-│   │   ├── compliance/      # Compliance monitoring components
-│   │   ├── analytics/       # Analytics and reporting components
-│   │   └── common/          # Shared UI components
-│   ├── services/            # Business logic and API services
-│   │   ├── treasury.ts      # Treasury management service
-│   │   ├── bitcoin.ts       # Bitcoin operations service
-│   │   ├── compliance.ts    # Compliance verification service
-│   │   └── dwallet.ts       # dWallet integration service
-│   ├── stores/              # State management
-│   │   ├── treasury.ts      # Treasury state store
-│   │   ├── user.ts          # User authentication store
-│   │   └── app.ts           # Global application state
-│   ├── types/               # TypeScript type definitions
-│   │   ├── treasury.ts      # Treasury-related types
-│   │   ├── bitcoin.ts       # Bitcoin transaction types
-│   │   └── compliance.ts    # Compliance data types
-│   ├── utils/               # Utility functions
-│   │   ├── formatters.ts    # Data formatting utilities
-│   │   ├── validators.ts    # Input validation
-│   │   └── constants.ts     # Application constants
-│   ├── styles/              # Global styles and themes
-│   │   ├── global.css       # Global CSS variables
-│   │   ├── components.css   # Component-specific styles
-│   │   └── themes.css       # Theme definitions
-│   ├── App.tsx              # Main application component
-│   ├── main.tsx             # Application entry point
-│   └── vite-env.d.ts        # Vite type definitions
-├── public/                  # Static assets
-│   ├── icons/               # Application icons
-│   ├── images/              # Images and graphics
-│   └── favicon.ico          # Favicon
-├── .storybook/              # Storybook configuration
-│   ├── main.ts              # Storybook main config
-│   ├── preview.ts           # Global story settings
-│   └── manager.ts           # Storybook manager config
-├── stories/                 # Component stories
-│   ├── treasury/            # Treasury component stories
-│   ├── proposals/           # Proposal component stories
-│   └── compliance/          # Compliance component stories
-├── package.json             # Dependencies and scripts
-├── tsconfig.json            # TypeScript configuration
-├── vite.config.ts           # Vite build configuration
-└── README.md                # This file
-```
-
-## 🧩 Key Components
-
-### Treasury Management
-
-#### TreasuryDashboard
-```typescript
-import './components/treasury/treasury-dashboard';
-
-<treasury-dashboard
-  .treasuryId=${treasuryId}
-  .balance=${balance}
-  .policies=${policies}
-  @policy-updated=${this.handlePolicyUpdate}
-></treasury-dashboard>
-```
-
-#### TreasuryVaultCreator
-```typescript
-import './components/treasury/treasury-vault-creator';
-
-<treasury-vault-creator
-  .dwalletConfig=${dwalletConfig}
-  @vault-created=${this.handleVaultCreated}
-></treasury-vault-creator>
-```
-
-### Proposal Management
-
-#### ProposalCreator
-```typescript
-import './components/proposals/proposal-creator';
-
-<proposal-creator
-  .treasuryId=${treasuryId}
-  .availablePolicies=${policies}
-  @proposal-created=${this.handleProposalCreated}
-></proposal-creator>
-```
-
-#### ProposalList
-```typescript
-import './components/proposals/proposal-list';
-
-<proposal-list
-  .proposals=${proposals}
-  .userRole=${userRole}
-  @proposal-approved=${this.handleProposalApproved}
-  @proposal-executed=${this.handleProposalExecuted}
-></proposal-list>
-```
-
-### Compliance Monitoring
-
-#### ComplianceChecker
-```typescript
-import './components/compliance/compliance-checker';
-
-<compliance-checker
-  .proposalId=${proposalId}
-  .recipientAddress=${recipientAddress}
-  @compliance-completed=${this.handleComplianceCompleted}
-></compliance-checker>
-```
-
-#### AuditTrail
-```typescript
-import './components/compliance/audit-trail';
-
-<audit-trail
-  .treasuryId=${treasuryId}
-  .dateRange=${dateRange}
-  .filters=${filters}
-></audit-trail>
-```
-
-## 🔧 Configuration
-
-### Environment Variables
-
-Create a `.env` file in the frontend directory:
-
-```env
-# Sui Network Configuration
-VITE_SUI_NETWORK=testnet
-VITE_SUI_RPC_URL=https://fullnode.testnet.sui.io:443
-VITE_PACKAGE_ID=0x...
-
-# dWallet Configuration
-VITE_DWALLET_NETWORK_URL=https://rpc.testnet.dwallet.io
-VITE_DWALLET_PACKAGE_ID=0x...
-
-# Application Configuration
-VITE_APP_NAME="BitcoinVault Pro"
-VITE_APP_VERSION="1.0.0"
-VITE_ENVIRONMENT=development
-
-# API Endpoints
-VITE_BITCOIN_API_URL=https://api.bitcoin.com
-VITE_COMPLIANCE_API_URL=https://api.compliance-provider.com
-
-# Feature Flags
-VITE_ENABLE_ANALYTICS=true
-VITE_ENABLE_COMPLIANCE=true
-VITE_ENABLE_EMERGENCY_MODE=true
-```
-
-### Sui Client Configuration
-
-```typescript
-// src/config/sui.ts
-import { SuiClient } from '@mysten/sui/client';
-
-export const suiClient = new SuiClient({
-  url: import.meta.env.VITE_SUI_RPC_URL,
-});
-
-export const packageId = import.meta.env.VITE_PACKAGE_ID;
-```
-
-### dWallet Configuration
-
-```typescript
-// src/config/dwallet.ts
-import { DWalletClient } from '@dwallet-network/sdk';
-
-export const dwalletClient = new DWalletClient({
-  networkUrl: import.meta.env.VITE_DWALLET_NETWORK_URL,
-  packageId: import.meta.env.VITE_DWALLET_PACKAGE_ID,
-});
-```
-
-## 🎨 Styling & Theming
-
-### CSS Custom Properties
-
-```css
-/* src/styles/global.css */
-:root {
-  /* Colors */
-  --primary-color: #1a73e8;
-  --secondary-color: #34a853;
-  --error-color: #ea4335;
-  --warning-color: #fbbc04;
-  --success-color: #34a853;
-  
-  /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  
-  /* Spacing */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  
-  /* Borders */
-  --border-radius: 0.375rem;
-  --border-width: 1px;
-  --border-color: #e5e7eb;
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-```
-
-### Component Styling
-
-```typescript
-// Example component with styling
-import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-
-@customElement('treasury-card')
-export class TreasuryCard extends LitElement {
-  static styles = css`
-    :host {
-      display: block;
-      background: white;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow-md);
-      padding: var(--spacing-lg);
-      margin: var(--spacing-md);
-    }
-    
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--spacing-md);
-    }
-    
-    .title {
-      font-size: var(--font-size-lg);
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-    
-    .balance {
-      font-size: var(--font-size-xl);
-      font-weight: 700;
-      color: var(--primary-color);
-    }
-  `;
-
-  @property({ type: String }) treasuryName = '';
-  @property({ type: Number }) balance = 0;
-
-  render() {
-    return html`
-      <div class="header">
-        <h3 class="title">${this.treasuryName}</h3>
-        <div class="balance">${this.formatBTC(this.balance)} BTC</div>
-      </div>
-      <slot></slot>
-    `;
-  }
-
-  private formatBTC(satoshis: number): string {
-    return (satoshis / 100000000).toFixed(8);
-  }
-}
-```
-
-## 🔄 State Management
+### Dashboard
+The main dashboard provides:
+- Treasury vault overview
+- Balance and portfolio analytics
+- Recent transaction history
+- Risk assessment metrics
+- Quick action buttons
 
 ### Treasury Store
+Centralized state management for:
+- Vault data and configurations
+- Transaction history and status
+- Compliance records
+- Loading states and error handling
 
-```typescript
-// src/stores/treasury.ts
-import { atom, map } from 'nanostores';
-import type { TreasuryVault, ExpenditureProposal } from '../types/treasury';
+### UI Components
+Reusable components built with:
+- Radix UI primitives for accessibility
+- Tailwind CSS for styling
+- TypeScript for type safety
 
-export const $treasuries = map<Record<string, TreasuryVault>>({});
-export const $selectedTreasury = atom<string | null>(null);
-export const $proposals = map<Record<string, ExpenditureProposal>>({});
-export const $isLoading = atom<boolean>(false);
+## Smart Contract Integration
 
-export const treasuryActions = {
-  setTreasuries(treasuries: TreasuryVault[]) {
-    const treasuryMap = treasuries.reduce((acc, treasury) => {
-      acc[treasury.id] = treasury;
-      return acc;
-    }, {} as Record<string, TreasuryVault>);
-    $treasuries.set(treasuryMap);
-  },
+The frontend is designed to integrate with the BitcoinVault Pro smart contracts:
 
-  selectTreasury(treasuryId: string) {
-    $selectedTreasury.set(treasuryId);
-  },
+- **Package ID**: `0x6dbe0b8c4a3f4b2e1d7c9a8b5f3e2d1c0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4`
+- **Enterprise Treasury**: Core treasury management
+- **Bitcoin Operations**: Bitcoin transaction handling
+- **Compliance Engine**: Regulatory compliance
 
-  addProposal(proposal: ExpenditureProposal) {
-    $proposals.setKey(proposal.id, proposal);
-  },
+## Demo Mode
 
-  updateProposal(proposalId: string, updates: Partial<ExpenditureProposal>) {
-    const current = $proposals.get()[proposalId];
-    if (current) {
-      $proposals.setKey(proposalId, { ...current, ...updates });
-    }
-  }
-};
-```
+The application includes a demo mode that showcases:
+- Mock treasury vaults with realistic data
+- Sample transactions and approvals
+- Risk assessment examples
+- Compliance monitoring interface
 
-### Using Stores in Components
+## Customization
 
-```typescript
-import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { StoreController } from '@nanostores/lit';
-import { $treasuries, $selectedTreasury } from '../stores/treasury';
+### Theming
+The application uses a custom Bitcoin-themed color palette:
+- Primary colors: Bitcoin orange (#f97316)
+- Gradients and accents for visual appeal
+- Dark/light mode support
 
-@customElement('treasury-selector')
-export class TreasurySelector extends LitElement {
-  private treasuries = new StoreController(this, $treasuries);
-  private selectedTreasury = new StoreController(this, $selectedTreasury);
+### Configuration
+Key configuration options:
+- Bitcoin price feeds (currently mocked)
+- Vault display preferences
+- Transaction filtering options
+- Compliance rule settings
 
-  render() {
-    const treasuries = Object.values(this.treasuries.value);
-    const selected = this.selectedTreasury.value;
+## Production Deployment
 
-    return html`
-      <select @change=${this.handleTreasuryChange}>
-        <option value="">Select Treasury</option>
-        ${treasuries.map(treasury => html`
-          <option 
-            value=${treasury.id} 
-            ?selected=${treasury.id === selected}
-          >
-            ${treasury.name}
-          </option>
-        `)}
-      </select>
-    `;
-  }
-
-  private handleTreasuryChange(e: Event) {
-    const select = e.target as HTMLSelectElement;
-    treasuryActions.selectTreasury(select.value);
-  }
-}
-```
-
-## 🧪 Testing
-
-### Component Testing
-
-```typescript
-// src/components/__tests__/treasury-card.test.ts
-import { expect, fixture, html } from '@open-wc/testing';
-import '../treasury/treasury-card';
-import type { TreasuryCard } from '../treasury/treasury-card';
-
-describe('TreasuryCard', () => {
-  it('displays treasury name and balance', async () => {
-    const el: TreasuryCard = await fixture(html`
-      <treasury-card 
-        treasuryName="Test Treasury" 
-        .balance=${100000000}
-      ></treasury-card>
-    `);
-
-    expect(el.shadowRoot?.textContent).to.include('Test Treasury');
-    expect(el.shadowRoot?.textContent).to.include('1.00000000 BTC');
-  });
-
-  it('formats balance correctly', async () => {
-    const el: TreasuryCard = await fixture(html`
-      <treasury-card .balance=${50000000}></treasury-card>
-    `);
-
-    expect(el.shadowRoot?.textContent).to.include('0.50000000 BTC');
-  });
-});
-```
-
-### Service Testing
-
-```typescript
-// src/services/__tests__/treasury.test.ts
-import { expect } from '@esm-bundle/chai';
-import { TreasuryService } from '../treasury';
-import { mockSuiClient } from '../__mocks__/sui-client';
-
-describe('TreasuryService', () => {
-  let service: TreasuryService;
-
-  beforeEach(() => {
-    service = new TreasuryService(mockSuiClient);
-  });
-
-  it('creates treasury vault', async () => {
-    const vault = await service.createTreasuryVault({
-      name: 'Test Treasury',
-      description: 'Test Description',
-      organization: 'Test Org',
-      requiredSigners: ['0x123'],
-      minApprovalThreshold: 1
-    });
-
-    expect(vault).to.have.property('id');
-    expect(vault.name).to.equal('Test Treasury');
-  });
-});
-```
-
-## 📚 Storybook
-
-### Component Stories
-
-```typescript
-// stories/treasury/TreasuryCard.stories.ts
-import type { Meta, StoryObj } from '@storybook/web-components';
-import { html } from 'lit';
-import '../../src/components/treasury/treasury-card';
-
-const meta: Meta = {
-  title: 'Treasury/TreasuryCard',
-  component: 'treasury-card',
-  parameters: {
-    layout: 'centered',
-  },
-  argTypes: {
-    treasuryName: { control: 'text' },
-    balance: { control: 'number' },
-  },
-};
-
-export default meta;
-type Story = StoryObj;
-
-export const Default: Story = {
-  args: {
-    treasuryName: 'Enterprise Treasury',
-    balance: 100000000, // 1 BTC
-  },
-  render: (args) => html`
-    <treasury-card 
-      treasuryName=${args.treasuryName} 
-      .balance=${args.balance}
-    >
-      <p>Treasury content goes here</p>
-    </treasury-card>
-  `,
-};
-
-export const LargeBalance: Story = {
-  args: {
-    treasuryName: 'Main Treasury',
-    balance: 1000000000, // 10 BTC
-  },
-  render: (args) => html`
-    <treasury-card 
-      treasuryName=${args.treasuryName} 
-      .balance=${args.balance}
-    ></treasury-card>
-  `,
-};
-```
-
-## 🚀 Build & Deployment
-
-### Development
-
+### Build for Production
 ```bash
-# Start development server
-pnpm dev
-
-# Start with specific port
-pnpm dev --port 3000
-
-# Start Storybook
-pnpm storybook
+npm run build
 ```
 
-### Production Build
-
-```bash
-# Build for production
-pnpm build
-
-# Preview production build
-pnpm preview
-
-# Build Storybook
-pnpm build-storybook
+### Environment Variables
+Create a `.env` file for production settings:
+```env
+VITE_SUI_NETWORK=mainnet
+VITE_PACKAGE_ID=0x6dbe0b...
+VITE_BTC_PRICE_API=https://api.coinbase.com/v2/exchange-rates
 ```
 
-### Deployment
+### Deployment Options
+- **Vercel**: Automatic deployment from Git
+- **Netlify**: Static site hosting
+- **AWS S3**: Static website hosting
+- **IPFS**: Decentralized hosting
 
-```bash
-# Deploy to staging
-pnpm deploy:staging
+## Security Considerations
 
-# Deploy to production
-pnpm deploy:production
+- All sensitive operations require wallet connection
+- Transaction signing happens client-side
+- No private keys stored in frontend
+- HTTPS required for production
+- Content Security Policy recommended
 
-# Deploy Storybook
-pnpm deploy:storybook
-```
+## Browser Support
 
-## 🔧 Available Scripts
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
 
-```json
-{
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "test": "web-test-runner --coverage",
-    "test:watch": "web-test-runner --watch",
-    "lint": "eslint src --ext ts,tsx",
-    "lint:fix": "eslint src --ext ts,tsx --fix",
-    "format": "prettier --write src/**/*.{ts,tsx,css}",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "type-check": "tsc --noEmit"
-  }
-}
-```
+## Contributing
 
-## 🤝 Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
-1. Follow the component development guidelines
-2. Write comprehensive tests for new components
-3. Document components with Storybook stories
-4. Use TypeScript for type safety
-5. Follow the established coding standards
+## License
 
-## 📖 Documentation
+This project is licensed under the Apache 2.0 License.
 
-- [Component API Documentation](./docs/components.md)
-- [Service Documentation](./docs/services.md)
-- [State Management Guide](./docs/state-management.md)
-- [Styling Guide](./docs/styling.md)
+## Support
+
+For support and questions:
+- Create an issue on GitHub
+- Join our Discord community
+- Check the documentation
+
+## Roadmap
+
+### Phase 1 (Current)
+- ✅ Core dashboard interface
+- ✅ Treasury vault management
+- ✅ Transaction monitoring
+- ✅ Basic compliance features
+
+### Phase 2 (Next)
+- [ ] Real-time Sui wallet integration
+- [ ] Advanced analytics charts
+- [ ] Multi-vault management
+- [ ] Enhanced compliance reporting
+
+### Phase 3 (Future)
+- [ ] Mobile responsive design
+- [ ] Advanced risk modeling
+- [ ] Integration with external services
+- [ ] Multi-language support
 
 ---
 
-**Frontend built with modern web technologies for enterprise Bitcoin treasury management.**
+Built with ❤️ for the Bitcoin treasury management community.
