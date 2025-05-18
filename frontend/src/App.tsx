@@ -1,28 +1,19 @@
 // Copyright (c) Mysten Labs, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Dashboard from './components/Dashboard'
-import { Button } from './components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card'
-import { Bitcoin, Wallet, Shield } from 'lucide-react';
-import { ConnectButton } from '@mysten/dapp-kit';
-import '@mysten/dapp-kit/dist/index.css';
+import { Bitcoin, Wallet, Shield } from 'lucide-react'
+import { ConnectButton, useCurrentAccount } from '@mysten/dapp-kit'
+import '@mysten/dapp-kit/dist/index.css'
 
 function App() {
-	const [isConnected, setIsConnected] = useState(false)
+	const currentAccount = useCurrentAccount()
+	const [showDemo, setShowDemo] = useState(false)
 
-	const connectWallet = () => {
-		// Simulate wallet connection
-		setIsConnected(true)
-	}
-
-	const disconnectWallet = () => {
-		setIsConnected(false)
-	}
-
-	// If wallet is connected, show the dashboard
-	if (isConnected) {
+	// If wallet is connected or demo mode, show the dashboard
+	if (currentAccount || showDemo) {
 		return <Dashboard />
 	}
 
@@ -94,9 +85,15 @@ function App() {
 					</CardHeader>
 					<CardContent className="space-y-4">
 						<div className="space-y-3">
-								<ConnectButton className='w-full' />
+							<ConnectButton className="w-full" />
+							<button 
+								onClick={() => setShowDemo(true)}
+								className="w-full px-4 py-2 text-sm text-bitcoin-600 border border-bitcoin-200 rounded-md hover:bg-bitcoin-50 transition-colors"
+							>
+								Explore Demo Mode
+							</button>
 							<p className="text-xs text-gray-500">
-								Click to explore the interface
+								Connect wallet for full functionality or explore demo
 							</p>
 						</div>
 					</CardContent>
