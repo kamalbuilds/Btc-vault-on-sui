@@ -269,7 +269,9 @@ export class DWalletBitcoinService {
     blockHeight?: number
   }> {
     // In production, this would query the Bitcoin blockchain
-    // For now, we'll simulate transaction status
+    // For now, we'll simulate transaction status based on txid
+    console.log(`Checking status for transaction: ${txid}`)
+    
     return {
       confirmed: Math.random() > 0.5,
       confirmations: Math.floor(Math.random() * 6),
