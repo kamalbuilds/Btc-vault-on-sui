@@ -1,0 +1,16 @@
+[package]
+name = "bitcoin_vault"
+version = "1.0.0"
+authors = ["BitcoinVault Pro Team"]
+license = "Apache-2.0"
+
+[dependencies]
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/mainnet" }
+MoveStdlib = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/move-stdlib", rev = "framework/mainnet" }
+DWallet = { git = "https://github.com/dwallet-labs/dwallet-network.git", subdir = "integrations/sui", rev = "main" }
+
+[addresses]
+bitcoin_vault = "0x0"
+std = "0x1"
+sui = "0x2"
+dwallet = "0x3" 
